@@ -1,0 +1,294 @@
+---
+// Header Component - Sticky navigation with blur backdrop
+---
+
+<header class="header" id="header">
+  <div class="header__container container">
+    <!-- Logo -->
+    <a href="/" class="header__logo" aria-label="Grupo Santé - Inicio">
+      <svg class="header__logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="40" height="40" rx="10" fill="currentColor"/>
+        <path d="M20 8v24M8 20h24" stroke="white" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="20" cy="20" r="6" stroke="white" stroke-width="2" fill="none"/>
+      </svg>
+      <span class="header__logo-text">
+        Grupo <strong>Santé</strong>
+      </span>
+    </a>
+    
+    <!-- Desktop Navigation -->
+    <nav class="header__nav" aria-label="Navegación principal">
+      <ul class="header__menu">
+        <li><a href="#inicio" class="header__link">Inicio</a></li>
+        <li><a href="#nosotros" class="header__link">Nosotros</a></li>
+        <li><a href="#servicios" class="header__link">Servicios</a></li>
+        <li><a href="#proceso" class="header__link">Cómo Agendar</a></li>
+        <li><a href="#testimonios" class="header__link">Testimonios</a></li>
+        <li><a href="#ubicacion" class="header__link">Ubicación</a></li>
+      </ul>
+    </nav>
+    
+    <!-- CTA Button -->
+    <a href="https://api.whatsapp.com/send?phone=527711906926&text=Hola%20Grupo%20Sant%C3%A9,%20quisiera%20agendar%20mi%20estudio" 
+       class="btn btn--primary header__cta"
+       target="_blank"
+       rel="noopener noreferrer">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+        <line x1="16" y1="2" x2="16" y2="6"></line>
+        <line x1="8" y1="2" x2="8" y2="6"></line>
+        <line x1="3" y1="10" x2="21" y2="10"></line>
+      </svg>
+      Agendar Cita
+    </a>
+    
+    <!-- Mobile Menu Toggle -->
+    <button class="header__toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
+      <span class="header__toggle-bar"></span>
+      <span class="header__toggle-bar"></span>
+      <span class="header__toggle-bar"></span>
+    </button>
+  </div>
+  
+  <!-- Mobile Menu -->
+  <div class="header__mobile-menu" id="mobileMenu" aria-hidden="true">
+    <nav aria-label="Navegación móvil">
+      <ul class="header__mobile-links">
+        <li><a href="#inicio" class="header__mobile-link">Inicio</a></li>
+        <li><a href="#nosotros" class="header__mobile-link">Nosotros</a></li>
+        <li><a href="#servicios" class="header__mobile-link">Servicios</a></li>
+        <li><a href="#proceso" class="header__mobile-link">Cómo Agendar</a></li>
+        <li><a href="#testimonios" class="header__mobile-link">Testimonios</a></li>
+        <li><a href="#ubicacion" class="header__mobile-link">Ubicación</a></li>
+      </ul>
+      <a href="https://api.whatsapp.com/send?phone=527711906926&text=Hola%20Grupo%20Sant%C3%A9,%20quisiera%20agendar%20mi%20estudio" 
+         class="btn btn--primary btn--lg header__mobile-cta"
+         target="_blank"
+         rel="noopener noreferrer">
+        Agendar Cita por WhatsApp
+      </a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: var(--z-sticky);
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-light);
+    transition: all var(--transition-base);
+  }
+  
+  .header.scrolled {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .header__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+    gap: var(--space-6);
+  }
+  
+  /* Logo */
+  .header__logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    color: var(--primary);
+    font-family: var(--font-heading);
+    font-size: var(--text-xl);
+    font-weight: var(--font-medium);
+    transition: color var(--transition-fast);
+  }
+  
+  .header__logo:hover {
+    color: var(--primary-dark);
+  }
+  
+  .header__logo-icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+  }
+  
+  .header__logo-text strong {
+    font-weight: var(--font-bold);
+  }
+  
+  /* Desktop Navigation */
+  .header__nav {
+    display: none;
+  }
+  
+  .header__menu {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+  }
+  
+  .header__link {
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    color: var(--text-muted);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-fast);
+  }
+  
+  .header__link:hover {
+    color: var(--primary);
+    background: var(--primary-50);
+  }
+  
+  /* CTA Button */
+  .header__cta {
+    display: none;
+  }
+  
+  /* Mobile Toggle */
+  .header__toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+  }
+  
+  .header__toggle-bar {
+    width: 24px;
+    height: 2px;
+    background: var(--text);
+    border-radius: 2px;
+    transition: all var(--transition-base);
+    transform-origin: center;
+  }
+  
+  .header__toggle[aria-expanded="true"] .header__toggle-bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  
+  .header__toggle[aria-expanded="true"] .header__toggle-bar:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  
+  .header__toggle[aria-expanded="true"] .header__toggle-bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+  
+  /* Mobile Menu */
+  .header__mobile-menu {
+    position: fixed;
+    top: 72px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--surface);
+    padding: var(--space-8);
+    transform: translateX(100%);
+    transition: transform var(--transition-base);
+    overflow-y: auto;
+  }
+  
+  .header__mobile-menu[aria-hidden="false"] {
+    transform: translateX(0);
+  }
+  
+  .header__mobile-links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-bottom: var(--space-8);
+  }
+  
+  .header__mobile-link {
+    display: block;
+    padding: var(--space-4);
+    font-size: var(--text-lg);
+    font-weight: var(--font-medium);
+    color: var(--text);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-fast);
+  }
+  
+  .header__mobile-link:hover {
+    background: var(--primary-50);
+    color: var(--primary);
+  }
+  
+  .header__mobile-cta {
+    width: 100%;
+  }
+  
+  /* Desktop Styles */
+  @media (min-width: 1024px) {
+    .header__nav {
+      display: block;
+    }
+    
+    .header__cta {
+      display: inline-flex;
+    }
+    
+    .header__toggle {
+      display: none;
+    }
+    
+    .header__mobile-menu {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  // Header scroll effect
+  const header = document.getElementById('header');
+  
+  const handleScroll = () => {
+    if (window.scrollY > 50) {
+      header?.classList.add('scrolled');
+    } else {
+      header?.classList.remove('scrolled');
+    }
+  };
+  
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  
+  // Mobile menu toggle
+  const menuToggle = document.getElementById('menuToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  
+  menuToggle?.addEventListener('click', () => {
+    const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+    menuToggle.setAttribute('aria-expanded', (!isExpanded).toString());
+    mobileMenu?.setAttribute('aria-hidden', isExpanded.toString());
+    
+    // Prevent body scroll when menu is open
+    document.body.style.overflow = isExpanded ? '' : 'hidden';
+  });
+  
+  // Close mobile menu when clicking a link
+  const mobileLinks = document.querySelectorAll('.header__mobile-link');
+  mobileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      menuToggle?.setAttribute('aria-expanded', 'false');
+      mobileMenu?.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    });
+  });
+</script>

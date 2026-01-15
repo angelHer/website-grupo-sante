@@ -1,0 +1,453 @@
+---
+// Testimonials Section - Customer reviews carousel
+const testimonials = [
+  {
+    name: 'Karem C.',
+    badge: 'Local Guide',
+    rating: 5,
+    text: 'Excelente servicio, instalaciones muy limpias, médicos profesionales, trato amable y respetuoso.',
+    date: 'Hace 4 años',
+    source: 'Google Maps'
+  },
+  {
+    name: 'Miguel López',
+    badge: 'Local Guide',
+    rating: 5,
+    text: 'Muy resolutivos, excelente trato, los médicos muy calificados y los precios son bastante competitivos, ¡los recomiendo!',
+    date: 'Hace 3 años',
+    source: 'Google Maps'
+  },
+  {
+    name: 'Fabiola García Cruz',
+    badge: null,
+    rating: 5,
+    text: 'El mejor lugar, ¡súper recomendable! Trato a los niños magnífico y te explican todo muy bien.',
+    date: 'Hace 3 meses',
+    source: 'Google Maps'
+  }
+];
+---
+
+<section class="testimonials section" id="testimonios">
+  <div class="container">
+    <div class="section-header animate-on-scroll">
+      <span class="section-header__label">Testimonios</span>
+      <h2 class="section-header__title">Lo que dicen nuestros pacientes</h2>
+      <p class="section-header__description">
+        Más de 40 opiniones verificadas en Google Maps con 4.5 estrellas de calificación
+      </p>
+    </div>
+    
+    <!-- Rating Summary -->
+    <div class="testimonials__summary animate-on-scroll">
+      <div class="testimonials__rating">
+        <span class="testimonials__rating-value">4.5</span>
+        <div class="testimonials__stars">
+          {[1, 2, 3, 4, 5].map((star) => (
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              width="24" 
+              height="24" 
+              viewBox="0 0 24 24" 
+              fill={star <= 4 ? 'currentColor' : 'none'}
+              stroke="currentColor"
+              stroke-width="2"
+              class={star === 5 ? 'half-star' : ''}
+            >
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+          ))}
+        </div>
+        <span class="testimonials__rating-count">40 opiniones en Google</span>
+      </div>
+    </div>
+    
+    <!-- Testimonials Carousel -->
+    <div class="testimonials__carousel animate-on-scroll">
+      <div class="testimonials__track" id="testimonialsTrack">
+        {testimonials.map((testimonial, index) => (
+          <div class="testimonial-card" data-index={index}>
+            <div class="testimonial-card__header">
+              <div class="testimonial-card__avatar">
+                {testimonial.name.charAt(0)}
+              </div>
+              <div class="testimonial-card__info">
+                <p class="testimonial-card__name">{testimonial.name}</p>
+                {testimonial.badge && (
+                  <span class="testimonial-card__badge">{testimonial.badge}</span>
+                )}
+              </div>
+            </div>
+            
+            <div class="testimonial-card__stars">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  width="16" 
+                  height="16" 
+                  viewBox="0 0 24 24" 
+                  fill={star <= testimonial.rating ? 'currentColor' : 'none'}
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+              ))}
+            </div>
+            
+            <blockquote class="testimonial-card__text">
+              "{testimonial.text}"
+            </blockquote>
+            
+            <div class="testimonial-card__footer">
+              <span class="testimonial-card__date">{testimonial.date}</span>
+              <span class="testimonial-card__source">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                {testimonial.source}
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
+      
+      <!-- Carousel Controls -->
+      <div class="testimonials__controls">
+        <button class="testimonials__control testimonials__control--prev" id="prevTestimonial" aria-label="Anterior testimonial">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        
+        <div class="testimonials__dots" id="testimonialsDots">
+          {testimonials.map((_, index) => (
+            <button 
+              class={`testimonials__dot ${index === 0 ? 'active' : ''}`}
+              data-index={index}
+              aria-label={`Ir a testimonial ${index + 1}`}
+            />
+          ))}
+        </div>
+        
+        <button class="testimonials__control testimonials__control--next" id="nextTestimonial" aria-label="Siguiente testimonial">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Google Maps CTA -->
+    <div class="testimonials__cta animate-on-scroll">
+      <a href="https://maps.google.com/?cid=grupo-sante-pachuca" 
+         class="btn btn--secondary"
+         target="_blank"
+         rel="noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+          <circle cx="12" cy="10" r="3"></circle>
+        </svg>
+        Ver todas las opiniones en Google Maps
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Rating Summary */
+  .testimonials__summary {
+    text-align: center;
+    margin-bottom: var(--space-10);
+  }
+  
+  .testimonials__rating {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-6) var(--space-10);
+    background: var(--surface);
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-lg);
+  }
+  
+  .testimonials__rating-value {
+    font-family: var(--font-heading);
+    font-size: var(--text-5xl);
+    font-weight: var(--font-bold);
+    color: var(--primary);
+    line-height: 1;
+  }
+  
+  .testimonials__stars {
+    display: flex;
+    gap: var(--space-1);
+    color: #FFD700;
+  }
+  
+  .testimonials__stars .half-star {
+    color: #FFD700;
+    fill: url(#halfGradient);
+  }
+  
+  .testimonials__rating-count {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+  }
+  
+  /* Carousel */
+  .testimonials__carousel {
+    position: relative;
+    max-width: 900px;
+    margin-inline: auto;
+    overflow: hidden;
+  }
+  
+  .testimonials__track {
+    display: flex;
+    transition: transform 0.5s ease;
+  }
+  
+  /* Testimonial Card */
+  .testimonial-card {
+    flex: 0 0 100%;
+    padding: var(--space-2);
+  }
+  
+  .testimonial-card > *:not(.testimonial-card__header) {
+    padding-left: var(--space-6);
+    padding-right: var(--space-6);
+  }
+  
+  .testimonial-card {
+    background: var(--surface);
+    border-radius: var(--radius-2xl);
+    border: 1px solid var(--border);
+    padding: var(--space-8);
+    margin: 0 var(--space-2);
+  }
+  
+  .testimonial-card__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    margin-bottom: var(--space-4);
+    padding: 0;
+  }
+  
+  .testimonial-card__avatar {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    color: white;
+    font-family: var(--font-heading);
+    font-size: var(--text-xl);
+    font-weight: var(--font-bold);
+    border-radius: 50%;
+  }
+  
+  .testimonial-card__info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+  
+  .testimonial-card__name {
+    font-weight: var(--font-semibold);
+    margin-bottom: 0;
+  }
+  
+  .testimonial-card__badge {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--space-1) var(--space-2);
+    background: var(--primary-100);
+    color: var(--primary);
+    font-size: var(--text-xs);
+    font-weight: var(--font-medium);
+    border-radius: var(--radius-full);
+    width: fit-content;
+  }
+  
+  .testimonial-card__stars {
+    display: flex;
+    gap: 2px;
+    color: #FFD700;
+    margin-bottom: var(--space-4);
+    padding: 0;
+  }
+  
+  .testimonial-card__text {
+    font-size: var(--text-lg);
+    font-style: italic;
+    line-height: 1.7;
+    color: var(--text);
+    margin-bottom: var(--space-6);
+    padding: 0;
+  }
+  
+  .testimonial-card__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--border);
+    padding-left: 0;
+    padding-right: 0;
+  }
+  
+  .testimonial-card__date {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+  }
+  
+  .testimonial-card__source {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+  }
+  
+  /* Controls */
+  .testimonials__controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+    margin-top: var(--space-8);
+  }
+  
+  .testimonials__control {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    color: var(--text);
+    cursor: pointer;
+    transition: all var(--transition-base);
+  }
+  
+  .testimonials__control:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: var(--primary-50);
+  }
+  
+  .testimonials__dots {
+    display: flex;
+    gap: var(--space-2);
+  }
+  
+  .testimonials__dot {
+    width: 10px;
+    height: 10px;
+    background: var(--border);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all var(--transition-base);
+  }
+  
+  .testimonials__dot.active {
+    background: var(--primary);
+    transform: scale(1.2);
+  }
+  
+  .testimonials__dot:hover {
+    background: var(--primary-light);
+  }
+  
+  /* CTA */
+  .testimonials__cta {
+    text-align: center;
+    margin-top: var(--space-10);
+  }
+  
+  /* Tablet+ - Show multiple cards */
+  @media (min-width: 768px) {
+    .testimonial-card {
+      flex: 0 0 50%;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .testimonial-card {
+      flex: 0 0 33.333%;
+    }
+    
+    .testimonials__controls {
+      display: none;
+    }
+    
+    .testimonials__track {
+      transform: none !important;
+    }
+  }
+</style>
+
+<script>
+  // Carousel functionality
+  const track = document.getElementById('testimonialsTrack');
+  const dots = document.querySelectorAll('.testimonials__dot');
+  const prevBtn = document.getElementById('prevTestimonial');
+  const nextBtn = document.getElementById('nextTestimonial');
+  
+  let currentIndex = 0;
+  const totalSlides = dots.length;
+  
+  function updateCarousel(index: number) {
+    currentIndex = index;
+    const percentage = -currentIndex * 100;
+    if (track) {
+      track.style.transform = `translateX(${percentage}%)`;
+    }
+    
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === currentIndex);
+    });
+  }
+  
+  prevBtn?.addEventListener('click', () => {
+    const newIndex = currentIndex === 0 ? totalSlides - 1 : currentIndex - 1;
+    updateCarousel(newIndex);
+  });
+  
+  nextBtn?.addEventListener('click', () => {
+    const newIndex = currentIndex === totalSlides - 1 ? 0 : currentIndex + 1;
+    updateCarousel(newIndex);
+  });
+  
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => updateCarousel(index));
+  });
+  
+  // Auto-play (pause on hover)
+  let autoplayInterval: ReturnType<typeof setInterval>;
+  
+  function startAutoplay() {
+    autoplayInterval = setInterval(() => {
+      const newIndex = currentIndex === totalSlides - 1 ? 0 : currentIndex + 1;
+      updateCarousel(newIndex);
+    }, 5000);
+  }
+  
+  function stopAutoplay() {
+    clearInterval(autoplayInterval);
+  }
+  
+  startAutoplay();
+  
+  const carousel = document.querySelector('.testimonials__carousel');
+  carousel?.addEventListener('mouseenter', stopAutoplay);
+  carousel?.addEventListener('mouseleave', startAutoplay);
+</script>

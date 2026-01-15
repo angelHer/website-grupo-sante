@@ -1,0 +1,6 @@
+# Robots.txt for Grupo Santé
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://gruposante.com.mx/sitemap.xml

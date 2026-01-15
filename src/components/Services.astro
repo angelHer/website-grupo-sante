@@ -1,0 +1,332 @@
+---
+// Services Section - Accordion style service cards
+const services = [
+  {
+    id: 'ultrasonidos',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>`,
+    title: 'Ultrasonidos Diagnósticos',
+    description: 'Estudio de imagen con ondas de sonido que permite visualizar órganos internos sin radiación.',
+    details: {
+      purpose: 'Detectar problemas en abdomen, pelvis, corazón, tiroides, mama y tejidos blandos',
+      duration: '20-30 minutos',
+      preparation: 'Varía según tipo; algunos requieren ayuno o vejiga llena',
+      prescription: 'Sí requiere orden médica'
+    }
+  },
+  {
+    id: 'rayosx',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>`,
+    title: 'Radiografías (Rayos X)',
+    description: 'Imagen digital de alta resolución de huesos y pulmones usando radiación controlada.',
+    details: {
+      purpose: 'Detectar fracturas, infecciones y problemas pulmonares',
+      duration: '5-10 minutos',
+      preparation: 'Mínima; retira objetos metálicos',
+      prescription: 'Sí requiere orden médica'
+    }
+  },
+  {
+    id: 'electrocardiograma',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>`,
+    title: 'Electrocardiogramas (EKG)',
+    description: 'Registro del ritmo eléctrico del corazón para evaluar tu salud cardiaca.',
+    details: {
+      purpose: 'Evaluar salud cardiaca, detectar arritmias y problemas del corazón',
+      duration: '5 minutos',
+      preparation: 'Ninguna preparación necesaria',
+      prescription: 'No obligatoria'
+    }
+  },
+  {
+    id: 'densitometria',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 18a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2"></path><rect x="3" y="4" width="18" height="18" rx="2"></rect><circle cx="12" cy="10" r="2"></circle><line x1="8" y1="2" x2="8" y2="4"></line><line x1="16" y1="2" x2="16" y2="4"></line></svg>`,
+    title: 'Densitometrías Óseas',
+    description: 'Medición de densidad mineral en huesos, especialmente cadera y columna.',
+    details: {
+      purpose: 'Detectar osteoporosis y evaluar riesgo de fracturas',
+      duration: '10-15 minutos',
+      preparation: 'Ninguna preparación necesaria',
+      prescription: 'Sí requiere orden médica'
+    }
+  },
+  {
+    id: 'laboratorio',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2v17.5c0 1.4-1.1 2.5-2.5 2.5h0c-1.4 0-2.5-1.1-2.5-2.5V2"></path><path d="M8.5 2h7"></path><path d="M14.5 16h-5"></path></svg>`,
+    title: 'Análisis Clínicos',
+    description: 'Estudios de laboratorio en sangre y otros especímenes para evaluar tu salud.',
+    details: {
+      purpose: 'Evaluar salud general, detectar infecciones y problemas metabólicos',
+      duration: '5-10 minutos',
+      preparation: 'A veces ayuno según tipo de estudio',
+      prescription: 'Sí requiere orden médica (usualmente)'
+    }
+  }
+];
+---
+
+<section class="services section" id="servicios">
+  <div class="container">
+    <div class="section-header animate-on-scroll">
+      <span class="section-header__label">Nuestros Servicios</span>
+      <h2 class="section-header__title">Estudios de imagen profesionales</h2>
+      <p class="section-header__description">
+        Realizamos todos los estudios de imagen que tu médico solicite con tecnología moderna y resultados confiables
+      </p>
+    </div>
+    
+    <div class="services__grid stagger-children">
+      {services.map((service, index) => (
+        <div class="service-card animate-on-scroll" data-service={service.id}>
+          <button 
+            class="service-card__header"
+            aria-expanded="false"
+            aria-controls={`service-content-${service.id}`}
+          >
+            <div class="service-card__icon" set:html={service.icon} />
+            <div class="service-card__info">
+              <h3 class="service-card__title">{service.title}</h3>
+              <p class="service-card__description">{service.description}</p>
+            </div>
+            <div class="service-card__toggle">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </div>
+          </button>
+          
+          <div class="service-card__content" id={`service-content-${service.id}`} hidden>
+            <div class="service-card__details">
+              <div class="service-card__detail">
+                <span class="service-card__detail-label">Para qué sirve</span>
+                <span class="service-card__detail-value">{service.details.purpose}</span>
+              </div>
+              <div class="service-card__detail">
+                <span class="service-card__detail-label">Duración</span>
+                <span class="service-card__detail-value">{service.details.duration}</span>
+              </div>
+              <div class="service-card__detail">
+                <span class="service-card__detail-label">Preparación</span>
+                <span class="service-card__detail-value">{service.details.preparation}</span>
+              </div>
+              <div class="service-card__detail">
+                <span class="service-card__detail-label">Orden médica</span>
+                <span class="service-card__detail-value">{service.details.prescription}</span>
+              </div>
+            </div>
+            
+            <a href="https://api.whatsapp.com/send?phone=527711906926&text=Hola%20Grupo%20Sant%C3%A9,%20quisiera%20información%20sobre%20{encodeURIComponent(service.title)}" 
+               class="btn btn--secondary btn--sm"
+               target="_blank"
+               rel="noopener noreferrer">
+              Consultar disponibilidad
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+    
+    <div class="services__cta animate-on-scroll">
+      <p>¿Tienes dudas sobre qué estudio necesitas?</p>
+      <a href="https://api.whatsapp.com/send?phone=527711906926&text=Hola%20Grupo%20Sant%C3%A9,%20tengo%20dudas%20sobre%20qué%20estudio%20necesito" 
+         class="btn btn--whatsapp"
+         target="_blank"
+         rel="noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        Escríbenos por WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .services__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+    max-width: 900px;
+    margin-inline: auto;
+  }
+  
+  /* Service Card */
+  .service-card {
+    background: var(--surface);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transition: all var(--transition-base);
+  }
+  
+  .service-card:hover {
+    border-color: var(--primary-light);
+  }
+  
+  .service-card[data-expanded="true"] {
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary);
+  }
+  
+  .service-card__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    width: 100%;
+    padding: var(--space-5);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    transition: background var(--transition-fast);
+  }
+  
+  .service-card__header:hover {
+    background: var(--primary-50);
+  }
+  
+  .service-card__icon {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    color: white;
+    border-radius: var(--radius-lg);
+  }
+  
+  .service-card__info {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .service-card__title {
+    font-size: var(--text-lg);
+    font-weight: var(--font-semibold);
+    margin-bottom: var(--space-1);
+  }
+  
+  .service-card__description {
+    font-size: var(--text-sm);
+    color: var(--text-muted);
+    margin-bottom: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .service-card__toggle {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    transition: transform var(--transition-base);
+  }
+  
+  .service-card[data-expanded="true"] .service-card__toggle {
+    transform: rotate(180deg);
+  }
+  
+  /* Card Content (Expandable) */
+  .service-card__content {
+    padding: 0 var(--space-5) var(--space-5);
+    border-top: 1px solid var(--border);
+    animation: slideDown 0.3s ease;
+  }
+  
+  .service-card__content[hidden] {
+    display: none;
+  }
+  
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .service-card__details {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+    padding-top: var(--space-5);
+    margin-bottom: var(--space-5);
+  }
+  
+  .service-card__detail {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+  
+  .service-card__detail-label {
+    font-size: var(--text-xs);
+    font-weight: var(--font-semibold);
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  .service-card__detail-value {
+    font-size: var(--text-sm);
+    color: var(--text);
+  }
+  
+  /* CTA */
+  .services__cta {
+    text-align: center;
+    margin-top: var(--space-12);
+    padding: var(--space-8);
+    background: var(--primary-50);
+    border-radius: var(--radius-2xl);
+  }
+  
+  .services__cta p {
+    font-size: var(--text-lg);
+    color: var(--text-muted);
+    margin-bottom: var(--space-4);
+  }
+  
+  /* Tablet */
+  @media (min-width: 640px) {
+    .service-card__details {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>
+
+<script>
+  // Accordion functionality
+  document.querySelectorAll('.service-card__header').forEach(button => {
+    button.addEventListener('click', () => {
+      const card = button.closest('.service-card');
+      const content = button.nextElementSibling as HTMLElement;
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+      
+      // Close all other cards
+      document.querySelectorAll('.service-card').forEach(otherCard => {
+        if (otherCard !== card) {
+          otherCard.setAttribute('data-expanded', 'false');
+          const otherButton = otherCard.querySelector('.service-card__header');
+          const otherContent = otherCard.querySelector('.service-card__content') as HTMLElement;
+          otherButton?.setAttribute('aria-expanded', 'false');
+          if (otherContent) otherContent.hidden = true;
+        }
+      });
+      
+      // Toggle current card
+      button.setAttribute('aria-expanded', (!isExpanded).toString());
+      card?.setAttribute('data-expanded', (!isExpanded).toString());
+      content.hidden = isExpanded;
+    });
+  });
+</script>
