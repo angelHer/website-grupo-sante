@@ -104,11 +104,13 @@
         
         <!-- Main illustration circle -->
         <div class="hero__circle">
-          <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-            <circle cx="8.5" cy="8.5" r="1.5"></circle>
-            <polyline points="21 15 16 10 5 21"></polyline>
-          </svg>
+          <img 
+            src="/images/hero-doctor.png" 
+            alt="Doctora radióloga de Grupo Santé sonriendo" 
+            class="hero__image"
+            width="280"
+            height="280"
+          />
         </div>
       </div>
     </div>
@@ -170,7 +172,23 @@
     text-align: center;
   }
   
-
+  .hero__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 200, 0, 0.1));
+    border: 1px solid rgba(255, 200, 0, 0.3);
+    border-radius: var(--radius-full);
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    color: #B8860B;
+    margin-bottom: var(--space-6);
+  }
+  
+  .hero__badge svg {
+    color: #FFD700;
+  }
   
   .hero__title {
     font-size: var(--text-4xl);
@@ -241,17 +259,24 @@
     transform: translate(-50%, -50%);
     width: 280px;
     height: 280px;
-    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    background: transparent;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 20px 60px rgba(13, 110, 110, 0.3);
+    box-shadow: 0 20px 60px rgba(13, 110, 110, 0.2);
+    overflow: hidden;
+    border: 4px solid white;
+    /* Ensure circle shape */
+    border-radius: 50%;
   }
   
-  .hero__circle svg {
-    color: white;
-    opacity: 0.9;
+  .hero__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top; /* Focus on face */
+    display: block;
   }
   
   .hero__floating-card {
@@ -266,6 +291,7 @@
     font-size: var(--text-sm);
     font-weight: var(--font-medium);
     white-space: nowrap;
+    z-index: 10;
   }
   
   .hero__floating-card svg {
