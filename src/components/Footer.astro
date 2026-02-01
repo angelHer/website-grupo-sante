@@ -9,12 +9,7 @@ const currentYear = new Date().getFullYear();
       <!-- Brand Column -->
       <div class="footer__brand">
         <a href="/" class="footer__logo">
-          <svg class="footer__logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="40" height="40" rx="10" fill="currentColor"/>
-            <path d="M20 8v24M8 20h24" stroke="white" stroke-width="4" stroke-linecap="round"/>
-            <circle cx="20" cy="20" r="6" stroke="white" stroke-width="2" fill="none"/>
-          </svg>
-          <span>Grupo <strong>Santé</strong></span>
+          <img src="/images/logo.png" alt="Grupo Santé Radiodiagnóstico Médico" class="footer__logo-img" />
         </a>
         <p class="footer__description">
           Centro de radiodiagnóstico y análisis clínicos en Pachuca de Soto. 
@@ -133,21 +128,15 @@ const currentYear = new Date().getFullYear();
   .footer__logo {
     display: inline-flex;
     align-items: center;
-    gap: var(--space-3);
-    color: white;
-    font-family: var(--font-heading);
-    font-size: var(--text-xl);
     margin-bottom: var(--space-4);
   }
   
-  .footer__logo-icon {
-    width: 40px;
-    height: 40px;
-    color: var(--primary-light);
-  }
-  
-  .footer__logo strong {
-    font-weight: var(--font-bold);
+  .footer__logo-img {
+    height: 60px;
+    width: auto;
+    max-width: 200px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
   }
   
   .footer__description {
