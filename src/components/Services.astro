@@ -114,7 +114,7 @@ const services = [
               </div>
             </div>
             
-            <a href="https://api.whatsapp.com/send?phone=527711906926&text=Hola%20Grupo%20Sant%C3%A9,%20quisiera%20información%20sobre%20{encodeURIComponent(service.title)}" 
+            <a href={`https://api.whatsapp.com/send?phone=527711906926&text=Hola%20Grupo%20Sant%C3%A9,%20quisiera%20información%20sobre%20${encodeURIComponent(service.title)}`} 
                class="btn btn--secondary btn--sm"
                target="_blank"
                rel="noopener noreferrer">
